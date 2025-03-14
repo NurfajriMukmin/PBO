@@ -1,0 +1,93 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Evaluasi {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        ArrayList<String> item = new ArrayList<>();
+        ArrayList<Integer> total = new ArrayList<>();
+
+        int pilihan;
+
+        do {
+            System.out.println("Menu:");
+            System.out.println("1. Tambahkan Item Belanja");
+            System.out.println("2. Hapus Item Belanjaan");
+            System.out.println("3. Tampilkan Seluruh Item belanjaan");
+            System.out.println("4. Cari Item Belanjaan");
+            System.out.println("0. Keluar Dari Program");
+
+            System.out.print("Pilih Menu : ");
+            pilihan = input.nextInt();
+            input.nextLine();
+
+            switch (pilihan) {
+                case 1 :
+                    System.out.print("Masukkan Nama Item Belanjaan: ");
+                    String nama = input.nextLine();
+                    item.add(nama);
+
+                    System.out.print("Masukkan Harga Item Belanjaan: ");
+                    int harga = input.nextInt();
+                    total.add(harga);
+
+                    System.out.println("Item Belanjaan Telah Di Tambahkan");
+                    break;
+
+                case 2 :
+//                    System.out.print("Masukkan Nama Item Belanjaan Yang Akan Dihapus : ");
+//                    String hapus = input.nextLine();
+//                    if (item.contains(hapus)) {
+//                        item.remove(hapus);
+//                        System.out.println("Item Belanjaan Telah Di Hapus");
+//                    } else {
+//                        System.out.println("Tidak Ada item Yang Di Hapus, Harap Masukkan Nama Item Yang Sesuai...!");
+//                    }
+//                    break;
+
+                    System.out.print("Masukkan Nama Item Belanjaan Yang Akan Dihapus: ");
+                    String hapus = input.nextLine();
+                    int index = item.indexOf(hapus);
+                    if (index != -1) {
+                        item.remove(index);
+                        total.remove(index);
+                        System.out.println("Item Belanjaan Telah Dihapus");
+                    } else {
+                        System.out.println("Tidak Ada Item Yang Dihapus, Harap Masukkan Nama Item Yang Sesuai...!");
+                    }
+                    break;
+
+                case 3 :
+                    System.out.println("Seluruh Item :");
+                    System.out.println("==============");
+                    int totalHarga = 0;
+                    for (int i = 0; i < item.size(); i++) {
+                        System.out.println((i + 1) + ". " + item.get(i) + " - Rp " + total.get(i));
+                        totalHarga += total.get(i);
+                    }
+                    System.out.println("====================");
+                    System.out.println("Total Harga Belanjaan: Rp " + totalHarga);
+                    break;
+
+                case 4 :
+                    System.out.print("Masukkan Nama Item Belanjaan yang Dicari: ");
+                    String cari = input.nextLine();
+                    int cariIndex = item.indexOf(cari);
+                    if (cariIndex != -1) {
+                        System.out.println(cari + " - Rp " + total.get(cariIndex));
+                    } else {
+                        System.out.println("Item Belanjaan Tidak Ditemukan!");
+                    }
+                    break;
+
+                case 0 :
+                    System.out.println("Keluar Dari Program...");
+                    break;
+
+                default:
+                    System.out.println("Pilihan Tidak Valid, Coba Lagi");
+            }
+        } while (pilihan != 0);
+    }
+}
